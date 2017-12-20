@@ -1,0 +1,4 @@
+Flask-SQLAlchemy==2.1
+Flask==0.11.1
+psycopg2==2.7.3.2
+alembic==0.9.6
