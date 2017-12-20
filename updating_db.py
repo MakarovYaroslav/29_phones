@@ -30,11 +30,6 @@ if __name__ == "__main__":
                     number = order.contact_phone
                     new_number = format_phone_number(order.contact_phone)
                     order.formatted_phone = new_number
-                    print(order.id)
-                    print(order.formatted_phone)
-                    print(number, " - ", new_number)
                 db.session.commit()
                 last_order_id = orders[-1].id
-            print(last_order_id)
-            print(len(orders))
-            time.sleep(2)
+            time.sleep(120)
