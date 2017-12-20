@@ -22,6 +22,7 @@ db.init_app(app)
 
 if __name__ == "__main__":
     last_order_id = 0
+    timeout = 120
     while True:
         with app.app_context():
             orders = Orders.query.all()[last_order_id:]
@@ -32,4 +33,4 @@ if __name__ == "__main__":
                     order.formatted_phone = new_number
                 db.session.commit()
                 last_order_id = orders[-1].id
-            time.sleep(120)
+            time.sleep(timeout)
