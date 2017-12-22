@@ -3,7 +3,8 @@ from alembic import context
 from sqlalchemy import engine_from_config, pool
 from logging.config import fileConfig
 import sys
-sys.path.insert(0, '.')
+path_position = 0
+sys.path.insert(path_position, '.')
 from updating_db import app
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.import sys
