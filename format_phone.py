@@ -13,8 +13,8 @@ def is_numeric(phone_number):
 
 
 def remove_country_code(phone_number):
-    if phone_number[:1] == '+':
-        if phone_number[:2] == '+7':
+    if phone_number.startswith('+'):
+        if phone_number.startswith('+7'):
             number_without_code = phone_number[2:]
             return number_without_code
         else:
@@ -27,7 +27,7 @@ def truncate_number_length(phone_number):
     digits = len(phone_number)
     if digits == 10:
         return phone_number
-    elif digits == 11 and phone_number[:1] == '8':
+    elif digits == 11 and phone_number.startswith('8'):
         phone_number = phone_number[1:]
         return phone_number
     else:
