@@ -24,7 +24,7 @@ db.init_app(app)
 
 if __name__ == "__main__":
     last_order_id = 0
-    timeout = 2
+    timeout = 120
     while True:
         with app.app_context():
             try:
@@ -33,11 +33,10 @@ if __name__ == "__main__":
                     for order in orders:
                         number = order.contact_phone
                         new_number = format_phone_number(number)
-                        print(number, new_number)
                         order.formatted_phone = new_number
                     db.session.commit()
                     last_order_id = orders[-1].id
-            except (psycopg2.OperationalError, OperationalError) as e:
+            except (psycopg2.OperationalError, OperationalError):
                 pass
             finally:
                 time.sleep(timeout)
