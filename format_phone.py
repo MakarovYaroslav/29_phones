@@ -1,4 +1,5 @@
 import re
+import phonenumbers
 
 
 def remove_punctuation(phone_number):
@@ -24,12 +25,10 @@ def remove_country_code(phone_number):
 
 
 def truncate_number_length(phone_number):
-    digits = len(phone_number)
-    if digits == 10:
-        return phone_number
-    elif digits == 11 and phone_number.startswith('8'):
-        phone_number = phone_number[1:]
-        return phone_number
+    phonenumber = phonenumbers.parse(phone_number, "RU")
+    if phonenumbers.is_valid_number(phonenumber):
+        national_number = str(phonenumber.national_number)
+        return national_number
     else:
         return None
 
