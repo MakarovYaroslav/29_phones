@@ -22,6 +22,14 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 
+def format_phones_in_db(orders):
+    for order in orders:
+        number = order.contact_phone
+        new_number = format_phone_number(number)
+        order.formatted_phone = new_number
+    db.session.commit()
+
+
 if __name__ == "__main__":
     last_order_id = 0
     timeout = 120
@@ -30,11 +38,7 @@ if __name__ == "__main__":
             try:
                 orders = Orders.query.all()[last_order_id:]
                 if len(orders) != 0:
-                    for order in orders:
-                        number = order.contact_phone
-                        new_number = format_phone_number(number)
-                        order.formatted_phone = new_number
-                    db.session.commit()
+                    format_phones_in_db(orders)
                     last_order_id = orders[-1].id
             except (psycopg2.OperationalError, OperationalError):
                 pass
