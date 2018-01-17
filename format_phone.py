@@ -9,11 +9,14 @@ def remove_punctuation(phone_number):
 
 
 def remove_country_code(phone_number):
-    phonenumber = phonenumbers.parse(phone_number, "RU")
-    if phonenumbers.is_valid_number(phonenumber):
-        national_number = str(phonenumber.national_number)
-        return national_number
-    else:
+    try:
+        phonenumber = phonenumbers.parse(phone_number, "RU")
+        if phonenumbers.is_possible_number(phonenumber):
+            national_number = str(phonenumber.national_number)
+            return national_number
+        else:
+            return None
+    except phonenumbers.NumberParseException:
         return None
 
 
@@ -24,6 +27,6 @@ def format_phone_number(phone_number):
     if not number:
         return None
     number = remove_country_code(number)
-    if number is None:
+    if number is None or len(number) != 10:
         return None
     return number
