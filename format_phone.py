@@ -9,10 +9,7 @@ def remove_punctuation(phone_number):
 
 def is_numeric(phone_number):
     digits_re = re.compile(r'^\d+$')
-    if not digits_re.match(phone_number):
-        return False
-    else:
-        return True
+    return bool(digits_re.match(phone_number))
 
 
 def remove_country_code(phone_number):
